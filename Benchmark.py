@@ -7,7 +7,7 @@ class Benchmark :
 
     def run (self, audio_file = "audios/sample1.wav"):
         
-        benchmark_result = []
+        self.benchmark_result = []
         for solution in self.solutions:
             
             start_time = time.time()
@@ -19,12 +19,19 @@ class Benchmark :
 
             # Word Error Rate
             
-            benchmark_result.append({
-                #'transcription_result' : audio_transcription,
+            self.benchmark_result.append({
+                'transcription_result' : audio_transcription,
                 'solution': solution['name'],
                 'transcription_time': elapsed_time,
             })
-        return benchmark_result
+
+        return self.benchmark_result
+
+    def print (self) :
+        for solution in self.benchmark_result:
+            print(f"--------------- Solution : {solution['solution']} ---------------")
+            print(f"Transcription time : {solution['transcription_time']}")
+            print(f"Result : {solution['transcription_result']}")
 
 
                 
